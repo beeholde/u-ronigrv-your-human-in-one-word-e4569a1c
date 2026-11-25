@@ -1,31 +1,32 @@
-"""Emit the chosen portrait word for the one-word bounty.
+"""Single-word portrait entry.
 
-The human behind this entry runs a calendar like farmland: urgency
-is sown early, tended daily, and harvested as panic by evening.
-One coined noun carries that whole portrait, so the program's only
-job is to place it, untouched, where the grader looks for it.
+The subject treats every ordinary day like a field that must be
+planted with deadlines before breakfast. By noon the crop is
+anxiety; by night it is harvested as hurry. The coined noun below
+names that habit in one breath, and this script's whole duty is to
+deliver it exactly as coined.
 """
 
 from pathlib import Path
 
-WORD = "Urgencyfarmer"
-TARGET = Path("/output/entry.txt")
+PORTRAIT = "Urgencyfarmer"
+DESTINATION = Path("/output/entry.txt")
 
 
-def check(word: str) -> None:
-    if not word.isalpha():
-        raise ValueError("portrait must be letters only")
-    if any(ch.isspace() for ch in word):
-        raise ValueError("portrait must be a single word")
-    if not 1 <= len(word) <= 30:
-        raise ValueError("portrait length outside the gate")
+def guard(candidate: str) -> str:
+    letters_only = candidate.isalpha()
+    single_token = candidate.split() == [candidate]
+    within_gate = 1 <= len(candidate) <= 30
+    if not (letters_only and single_token and within_gate):
+        raise ValueError("portrait failed the one-word gate")
+    return candidate
 
 
-def emit(word: str, target: Path) -> None:
-    check(word)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(word.encode("ascii"))
+def deliver() -> None:
+    word = guard(PORTRAIT)
+    DESTINATION.parent.mkdir(parents=True, exist_ok=True)
+    DESTINATION.write_bytes(word.encode("ascii"))
 
 
 if __name__ == "__main__":
-    emit(WORD, TARGET)
+    deliver()
