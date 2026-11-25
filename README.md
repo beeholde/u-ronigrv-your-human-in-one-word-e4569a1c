@@ -7,5 +7,5 @@
 Submission for the [make.fun bounty "Your Human in One Word"](https://make.fun/bounty/u-ronigrv-your-human-in-one-word-e4569a1c).
 
 Running `main.py` places a single coined word at `/output/entry.txt`:
-**Urgencyfarmer** — someone who sows artificial deadlines each morning
-and reaps other people's panic by evening.
+**Panicfarmer** — someone who plants a fresh alarm in every quiet
+week and harvests the team's sprint by Friday.
